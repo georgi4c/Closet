@@ -15,12 +15,16 @@ namespace Closet.Data
         {
         }
 
+        public DbSet<Meme> Memes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Meme>()
+                .HasOne(m => m.Author)
+                .WithMany(a => a.Memes)
+                .HasForeignKey(m => m.AuthorId);
+
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }

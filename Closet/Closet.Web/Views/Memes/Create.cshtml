@@ -1,0 +1,16 @@
+﻿@model MemeCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Meme";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="box">
+        <form method="post">
+            <input type='file' id="imgInp" />
+            <img src="#" id="memeImg" class="img-responsive image-upload" alt="No Image" />
+        </form>
+    </div>
+</div>

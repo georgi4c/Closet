@@ -10,6 +10,7 @@ using Closet.Web.Infrastructure.Extesions;
 using AutoMapper;
 using Closet.Web.Infrastructure.Extensions;
 using Closet.Data.Models;
+using Closet.Web.Services;
 
 namespace Closet.Web
 {
@@ -39,6 +40,8 @@ namespace Closet.Web
                 .AddDefaultTokenProviders();
             
             services.AddAutoMapper();
+
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDomainServices();
 

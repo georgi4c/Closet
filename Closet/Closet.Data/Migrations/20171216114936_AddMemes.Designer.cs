@@ -11,9 +11,10 @@ using System;
 namespace Closet.Data.Migrations
 {
     [DbContext(typeof(ClosetDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171216114936_AddMemes")]
+    partial class AddMemes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

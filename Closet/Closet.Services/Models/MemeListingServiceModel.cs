@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Closet.Data.Models
+namespace Closet.Services.Models
 {
-    public class Meme
+    public class MemeListingServiceModel
     {
         [Required]
         public int Id { get; set; }
@@ -13,9 +14,5 @@ namespace Closet.Data.Models
 
         [Required]
         public string ImageUrl { get; set; }
-
-        public string AuthorId { get; set; }
-
-        public User Author { get; set; }
     }
 }

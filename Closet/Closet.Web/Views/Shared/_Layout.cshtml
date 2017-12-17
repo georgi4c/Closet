@@ -19,9 +19,9 @@
     </environment>
 </head>
 <body>
-    <div class="brand">Closet</div>
+    @*<div class="brand">Closet</div>*@
     <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -32,29 +32,25 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html">Business Casual</a>
+                <a class="navbar-brand" href="index.html">Closet</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Memes" asp-action="Create">Create Meme</a></li>
+                    }
                 </ul>
+
+                @await Html.PartialAsync("_LoginPartial")
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
+   
     <div class="container body-content">
         @RenderBody()
         <hr />        
@@ -68,17 +64,16 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        $('.carousel').carousel({
-            interval: 5000 //changes the speed
-        })
-    </script>
-
+        
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
+        </script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
