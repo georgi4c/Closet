@@ -5,19 +5,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Closet.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Closet.Services;
 
 namespace Closet.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IMemeService memes;
+
+        public HomeController(IMemeService memes)
         {
-            return View();
+            this.memes = memes;
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
+            => this.View(await this.memes.TopThree());
+
         public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            => this.View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
+        
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Closet.Data.Models
 {
@@ -14,8 +16,14 @@ namespace Closet.Data.Models
         [Required]
         public string ImageUrl { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public string AuthorId { get; set; }
 
         public User Author { get; set; }
+
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+
+        public List<MemeVote> Votes { get; set; } = new List<MemeVote>();
     }
 }

@@ -10,5 +10,12 @@ namespace Closet.Data.Models
     public class User : IdentityUser
     {
         public List<Meme> Memes { get; set; } = new List<Meme>();
+
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+
+        public List<MemeVote> MemeVotes { get; set; } = new List<MemeVote>();
+
+        public List<CommentVote> CommentVotes { get; set; } = new List<CommentVote>();
+
     }
 }

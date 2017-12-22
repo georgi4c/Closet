@@ -13,5 +13,7 @@ namespace Closet.Web
         public const string TempDataErrorMessageKey = "ErrorMessage";
 
         public const string AdminArea = "Admin";
+
+        public const string WithId = "{id}";
     }
 }

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Create Meme";
 }
 
-<h2>@ViewData["Title"]</h2>
-
 <div class="row">
     <div class="box">
+        <h2>@ViewData["Title"]</h2>
+
         <form method="post">
             <div class="form-group">
                 <label asp-for="Title"></label>
@@ -15,10 +15,17 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type='file' id="imgInp" />
-                <img name="ImageUrl" src="#" id="memeImg" class="img-responsive image-upload form-group" alt="No Image" />
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Save</button>
+            <button type="submit" class="btn btn-success">Save</button>
         </form>
+        @*<input type='file' id="imgInp" />
+        <img src="#" id="meme" class="img-responsive image-upload form-group" alt="No Image" />*@
     </div>
 </div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

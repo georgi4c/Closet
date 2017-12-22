@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MemeListingServiceModel>
+
+@foreach (var meme in Model)
+{
+    <div class="row">
+        <div class="box box-center">
+            <h3><a href="/memes/details/@meme.Id" class="text-info">@meme.Title</a></h3>
+            <img src="@meme.ImageUrl" class="img-responsive" alt="No Image" />
+            <p>Created on: @meme.CreatedOn</p>
+            <div class="comment-icon">
+                @meme.Votes
+                <i class="fa fa-thumbs-up"></i>
+            </div>
+            <div class="comment-icon">
+                @meme.Comments
+                <i class="fa fa-comment"></i>
+            </div>
+            
+        </div>
+    </div>
+}
+

@@ -5,6 +5,14 @@
     <UserSecretsId>aspnet-Closet.Web-6A7EFCC2-AF20-442B-8948-771D6FA1D146</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\Memes\MemeDeleteViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\meme-details.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />

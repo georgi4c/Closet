@@ -6,10 +6,15 @@
     <title>@ViewData["Title"] - Closet</title>
 
     <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic">
+        <link rel="stylesheet" href="~/css/jquery.memegenerator.css" />
+        <link rel="stylesheet" href="~/css/comments.css" />
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -40,10 +45,15 @@
                     <li>
                         <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    @if (User.Identity.IsAuthenticated)
+                    <li><a asp-area="" asp-controller="Memes" asp-action="All">Memes</a></li>
+                    @if (User.Identity.IsAuthenticated || User.IsInRole(WebConstants.AdministratorRole))
                     {
-                        <li><a asp-area="" asp-controller="Memes" asp-action="Create">Create Meme</a></li>
+                        <li><a asp-area="" asp-controller="Memes" asp-action="Create">New Meme</a></li>
                     }
+                    @if (User.IsInRole(WebConstants.AdministratorRole))
+                    {
+                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a></li>
+                    }                    
                 </ul>
 
                 @await Html.PartialAsync("_LoginPartial")
@@ -52,6 +62,12 @@
     </nav>
    
     <div class="container body-content">
+        @if (TempData.ContainsKey(WebConstants.TempDataSuccessMessageKey))
+        {
+            <div class="alert alert-success">
+                @TempData[WebConstants.TempDataSuccessMessageKey]
+            </div>
+        }
         @RenderBody()
         <hr />        
     </div>
@@ -67,8 +83,10 @@
         
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.memegenerator.js"></script>
         <script>
             $('.carousel').carousel({
                 interval: 5000 //changes the speed

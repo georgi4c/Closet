@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Closet.Common.Mapping;
+using Closet.Data.Models;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Closet.Web.Models.Memes
 {
-    public class MemeCreateViewModel
+    public class MemeCreateViewModel : IMapFrom<Meme>
     {
         [Required]
         [StringLength(60)]
