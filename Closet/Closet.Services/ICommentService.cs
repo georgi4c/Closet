@@ -9,5 +9,9 @@ namespace Closet.Services
         Task CreateAsync(string authorId, string content, int? memeId, int? parentCommentId);
 
         Task<int?> MemeId(int commentId);
+
+        Task Delete(int id);
+
+        Task<string> AuthorId(int id);
     }
 }

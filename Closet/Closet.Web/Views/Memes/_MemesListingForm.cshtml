@@ -4,8 +4,10 @@
 {
     <div class="row">
         <div class="box box-center">
-            <h3><a href="/memes/details/@meme.Id" class="text-info">@meme.Title</a></h3>
-            <img src="@meme.ImageUrl" class="img-responsive" alt="No Image" />
+            <a href="/memes/details/@meme.Id" class="text-info">
+                <h3>@meme.Title</h3>
+                <img src="@meme.ImageUrl" class="img-responsive" alt="No Image" />
+            </a>
             <p>Created on: @meme.CreatedOn</p>
             <div class="comment-icon">
                 @meme.Votes

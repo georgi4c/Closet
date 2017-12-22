@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
+using static Closet.Web.WebConstants;
+
 namespace Closet.Web.Controllers
 {
     [Authorize]
@@ -52,6 +54,27 @@ namespace Closet.Web.Controllers
             }
             
             return RedirectToAction("Details", "Memes", new { id = model.MemeId });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = this.userManager.GetUserId(User);
+            var memeAuthorId = await this.comments.AuthorId(id);
+            if (memeAuthorId != userId && !User.IsInRole(AdministratorRole))
+            {
+                return BadRequest();
+            }
+
+            var memeId = await this.comments.MemeId(id);
+
+            if (memeId == null)
+            {
+                return BadRequest();
+            }
+
+            await this.comments.Delete(id);
+
+            return RedirectToAction("Details", "Memes", new { id = memeId });
         }
     }
 }

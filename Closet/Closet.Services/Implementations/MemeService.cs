@@ -161,6 +161,6 @@ namespace Closet.Services.Implementations
         }
 
         public async Task<string> AuthorId(int id)
-        => await this.db.Memes.Where(m => m.Id == id).Select(m => m.AuthorId).FirstOrDefaultAsync();
+            => await this.db.Memes.Where(m => m.Id == id).Select(m => m.AuthorId).FirstOrDefaultAsync();
     }
 }

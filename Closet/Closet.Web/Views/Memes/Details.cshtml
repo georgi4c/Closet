@@ -11,6 +11,7 @@
             <span id="meme-votes" class="label label-primary">@Model.Votes</span>
             <i id="meme-downvote" class="glyphicon glyphicon-chevron-down"></i>
         </div>
+        <hr />
         <div>
             @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
             {
@@ -23,8 +24,8 @@
 
 <div class="row box box-center">
     <div class="comments-container">
-        <a href="/comments/create?memeId=@Model.Id&parentCommentId=null" class="btn btn-success">Add Comment</a>
         <h1>Comments</h1>
+        <a href="/comments/create?memeId=@Model.Id&parentCommentId=null" class="btn btn-success">Add Comment</a>
         <ul id="comments-list" class="comments-list">
             @foreach (var comment in Model.Comments)
             {
@@ -35,6 +36,11 @@
                                 <h6 class="comment-name@(Model.Author==comment.Author?" by-author":"")"><a href="/users/profile/@comment.AuthorId">@comment.Author</a></h6>
                                 <span>@comment.CreatedOn</span>
                                 <a href="/comments/create?memeId=null&parentCommentId=@comment.Id"><i class="fa fa-reply"></i></a>
+
+                                @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                {
+                                    <a href="/comments/delete/@comment.Id"><i class="fa fa-trash-o"></i></a>
+                                }       
                             </div>
                             <div class="comment-content">
                                 @comment.Content
@@ -50,6 +56,10 @@
                                     <div class="comment-head">
                                         <h6 class="comment-name@(Model.Author==subcomment.Author?" by-author":"")"><a href="/users/profile/@subcomment.AuthorId">@subcomment.Author</a></h6>
                                         <span>@subcomment.CreatedOn</span>
+                                        @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                        {
+                                            <a href="/comments/delete/@subcomment.Id"><i class="fa fa-trash-o"></i></a>
+                                        }       
                                     </div>
                                     <div class="comment-content">
                                         @subcomment.Content
