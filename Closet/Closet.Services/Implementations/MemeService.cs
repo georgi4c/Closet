@@ -102,7 +102,7 @@ namespace Closet.Services.Implementations
         public async Task<IEnumerable<MemeTopThreeServiceModel>> TopThree()
             => await this.db
                 .Memes
-                .OrderByDescending(m => m.CreatedOn)
+                .OrderByDescending(m => m.Votes.Select(v => v.Value).Sum())
                 .Take(3)
                 .ProjectTo<MemeTopThreeServiceModel>()
                 .ToListAsync();

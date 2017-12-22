@@ -2,8 +2,7 @@
 
 @foreach (var meme in Model)
 {
-    <div class="row">
-        <div class="box box-center">
+        <div class="row box box-center">
             <a href="/memes/details/@meme.Id" class="text-info">
                 <h3>@meme.Title</h3>
                 <img src="@meme.ImageUrl" class="img-responsive" alt="No Image" />
@@ -19,6 +18,6 @@
             </div>
             
         </div>
-    </div>
+    
 }
 
