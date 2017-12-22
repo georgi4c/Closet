@@ -26,8 +26,12 @@ namespace Closet.Web.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All(int page = 1)
+        public async Task<IActionResult> All([FromQuery]int page = 1)
             => View(await this.memes.AllAsync(page));
+
+        [AllowAnonymous]
+        public async Task<IActionResult> AllAsync([FromQuery]int page = 1)
+            => Json(await this.memes.AllAsync(page));
 
         public IActionResult Create()
             => View();

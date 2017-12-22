@@ -72,7 +72,7 @@ namespace Closet.Services.Implementations
                 Title = title,
                 ImageUrl = imageUrl,
                 AuthorId = userId,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.Now
             };
 
             this.db.Add(meme);

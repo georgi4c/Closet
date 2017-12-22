@@ -33,6 +33,12 @@ hr {
     border-color: #999999;
 }
 
+.
+
+.body-content {
+    width: 760px;
+}
+
 .brand,
 .address-bar {
     display: none;
@@ -169,6 +175,7 @@ footer {
 
     .navbar-nav > li > a {
         line-height: normal;
+        cursor: pointer;
     }
 
     .navbar-nav {
@@ -193,7 +200,7 @@ footer {
 }
 
 .img-responsive {
-    width: 50%;
+    max-width: 100%;
     display: block;
     margin: 0 auto;
 }

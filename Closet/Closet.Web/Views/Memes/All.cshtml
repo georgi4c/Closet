@@ -4,4 +4,72 @@
     ViewData["Title"] = "Memes";
 }
 
-@Html.Partial("_MemesListingForm", Model)
+<div id="memes-container">
+    @Html.Partial("_MemesListingForm", Model)
+</div>
+
+<input id="next-page" type="hidden" value="2"/>
+    
+<p id="loading">
+    <img src="images/loading.gif" alt="Loading…" />
+</p>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+</script>
+
+<script>
+    $(document).ready(function() {
+        var win = $(window);
+
+        // Each time the user scrolls
+        win.scroll(function() {
+            // End of the document reached?
+            if ($(document).height() - win.height() == win.scrollTop()) {
+                $('#loading').show();
+
+                $.ajax({
+                    url: '/memes/allasync?page=' + $("#next-page").val(),
+                    dataType: 'json',
+                    success: function (json) {
+                        var container = document.createDocumentFragment();
+
+                        let div = document.createElement('div');
+                        let anchor = document.createElement('a');
+                        let image = document.createElement('img');
+                        let h3 = document.createElement('h3');
+
+
+                        for (var item of json) {
+                            div.setAttribute('class', 'box box-center');
+
+                            image.setAttribute('src', item.imageUrl)
+                            h3.innerText = item.title;
+
+                            anchor.appendChild(h3);
+                            anchor.appendChild(image);                            
+
+                            div.append(anchor);
+
+                            container.append(div);
+                            //var parentDiv = $("div").addClass("row box box-center");
+
+                            //var title = $(`<a href="/memes/details/${item.Id}" class="text-info">
+                            //                    <h3>${item.title}</h3>
+                            //                    <img src="${item.imageUrl}" class="img-responsive" alt="No Image" />
+                            //                </a>`);
+                            //parentDiv.append(title);
+                            //container.append(parentDiv);
+                        }
+
+                        $('#memes-container').append(container)
+                        $('#loading').hide();
+                    }
+                });
+            }
+        });
+    });
+</script>
