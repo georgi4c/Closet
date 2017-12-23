@@ -22,6 +22,11 @@ namespace Closet.Tests.Services.Memes
 
         private const int MemeIdForDeleting = 1;
 
+        private const int MemeIdForEditing = 3;
+        private const string MemeTitle = "Edited";
+        private const string MemeImageUrl = "/images.jpg";
+
+
         private ClosetDbContext GetDbContext()
             => new ClosetDbContext(
                 new DbContextOptionsBuilder<ClosetDbContext>()
@@ -78,6 +83,29 @@ namespace Closet.Tests.Services.Memes
         }
 
         [Fact]
+        public async Task MemeServiceEditShould_EditEntity()
+        {
+            // Arrange
+
+            var context = this.GetDbContext();
+
+            this.PopulateData(context);
+
+            var memeService = new MemeService(context);
+
+            // Act
+
+            await memeService.Edit(MemeIdForEditing, MemeTitle, MemeImageUrl);
+
+            // Assert
+            var actualMeme = context.Memes.Find(MemeIdForEditing);
+
+            Assert.NotNull(actualMeme);
+            Assert.Equal(MemeTitle, actualMeme.Title);
+            Assert.Equal(MemeImageUrl, actualMeme.ImageUrl);
+        }
+
+        [Fact]
         public async Task MemeServiceDeleteShould_DeleteEntry()
         {
             // Arrange
@@ -90,12 +118,14 @@ namespace Closet.Tests.Services.Memes
 
             // Act
 
-            var returnedData = await memeService.Delete(MemeIdForDeleting);
+            await memeService.Delete(MemeIdForDeleting);
 
             // Assert
             Assert.True(!context.Memes.Any(m => m.Id == MemeIdForDeleting));
 
         }
+
+
 
     }
 }
