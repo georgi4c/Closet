@@ -1,6 +1,7 @@
 ﻿using Closet.Data.Models;
 using Closet.Services;
 using Closet.Services.Implementations;
+using Closet.Web.Infrastructure.Extesions;
 using Closet.Web.Infrastructure.Filters;
 using Closet.Web.Models.Comments;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +42,7 @@ namespace Closet.Web.Controllers
         }
 
         [HttpPost]
-        //[ValidateModelState]
+        [ValidateModelState]
         public async Task<IActionResult> Create(CommentCreateViewModel model)
         {
             var userId = this.userManager.GetUserId(User);
@@ -52,7 +53,9 @@ namespace Closet.Web.Controllers
             {
                 model.MemeId = await this.comments.MemeId(model.ParentCommentId.Value);
             }
-            
+
+            TempData.AddSuccessMessage($"Comment created successfully!");
+
             return RedirectToAction("Details", "Memes", new { id = model.MemeId });
         }
 

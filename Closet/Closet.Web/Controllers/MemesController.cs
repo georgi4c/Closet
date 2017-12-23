@@ -49,6 +49,8 @@ namespace Closet.Web.Controllers
 
             await this.memes.CreateAsync(userId, model.Title, model.ImageUrl);
 
+            TempData.AddSuccessMessage($"Meme created successfully!");
+
             return RedirectToAction(nameof(All));
         }
 

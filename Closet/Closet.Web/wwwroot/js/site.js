@@ -18,3 +18,7 @@ function readURL(input) {
 $("#imgInp").change(function () {
     readURL(this);
 });
+
+setTimeout(function () {
+    $('#temp-data-success').fadeOut('fast');
+}, 1000);
